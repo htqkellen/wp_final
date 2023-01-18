@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src='{% static "myapp/title_img.png" %}'>
+<p></p>
+This is my <span style="color:red">wonderful</span>
+page!
+
+The current time is: {{ time_of_day }}
+</body>
+</html>
