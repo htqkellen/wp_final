@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src='{% static "th2928_final/logo.png" %}' alt="image" width="400px">
+<h1>Cities</h1>
+<table>
+    <tr>
+        <th>City</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+    </tr>
+    {% for c in cities %}
+    <tr>
+    <td>{{ c.name }}</td><td>{{ c.latitude }}</td><td>{{ c.longitude }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
