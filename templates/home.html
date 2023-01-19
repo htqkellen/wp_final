@@ -1,20 +1,34 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<img src='{% static "th2928_final/logo.png" %}' alt="logo img">
-
-<p>
-This is my <span style="color:red">wonderful</span> page!
-</p>
-
-<p>
-The current time is: {{ time_of_day }}
-</p>
-
-<ol>
-    <li><a href="./weather">Weather</a></li>
-    <li><a href="./cities">City</a></li>
-</ol>
+    <div class="jumbotron text-center">
+        <p>Welcome to your <span style="color:red">One-Stop travel planning</span> app!</p>
+        <p>- Get packs ready since {{ time_of_day }} -</p>
+    </div>
+    <div id="instruction">
+        Click pictures under each step to get some quick peeks
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 class="lobster">Step 1: Lured by their names!</h3>
+                    <form action="{% url 'cities' %}" method="get">
+                        <input type="image" src='{% static "th2928_final/map.png" %}'
+                        alt="city img" class="img-center" name="city">
+                    </form>
+            </div>
+            <div class="col-sm-4">
+                <h3 class="lobster">Step 2: How's the weather?</h3>
+                    <p><a href="./cities">Weather</a></p>
+                    <img src='{% static "th2928_final/weather.jpg" %}' alt="weather img"
+                    action="{% url 'cities' %}" class="img-center" method="get">
+            </div>
+            <div class="col-sm-4">
+                <h3 class="lobster">The future!</h3>
+                    <p>Soon, you will be able to invest your money by buying, selling and saving in any currency!</p>
+            </div>
+        </div>
+    </div>
 
 <p></p>
 <a href="./maintenance">Maintenance</a>

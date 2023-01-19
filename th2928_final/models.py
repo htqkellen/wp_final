@@ -6,7 +6,7 @@ class City(models.Model):
     latitude = models.FloatField(max_length=20)
     longitude = models.FloatField(max_length=20)
     def __repr__(self):
-        return self.name + " " + self.latitude + " " + self.longitude
+        return f'{self.name} {self.latitude} {self.longitude}'
     def __str__(self):
-        return self.name + " " + self.latitude + " " + self.longitude
+        return f'{self.name} {self.latitude} {self.longitude}'
 
