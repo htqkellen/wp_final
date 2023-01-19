@@ -1,12 +1,7 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<img src='{% static "th2928_final/logo.png" %}'>
+{% block content %}
+<img src='{% static "th2928_final/logo.png" %}' alt="logo img">
 
 <p>
 This is my <span style="color:red">wonderful</span> page!
@@ -24,5 +19,4 @@ The current time is: {{ time_of_day }}
 <p></p>
 <a href="./maintenance">Maintenance</a>
 
-</body>
-</html>
+{% endblock %}
