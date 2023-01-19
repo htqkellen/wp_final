@@ -44,3 +44,8 @@ def view_cities(request):
     c_list = City.objects.all()
     data['cities'] = c_list
     return render(request,'cities.html',context=data)
+
+def view_weather(request):
+    data = dict()
+
+    return render(request,'weather.html',context=data)
