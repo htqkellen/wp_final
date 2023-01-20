@@ -48,8 +48,27 @@ def view_cities(request):
 
 def view_weather(request):
     data = dict()
-
-    return render(request,'weather.html',context=data)
+    try:
+        city = request.GET['city']
+        c1 = City.objects.get(name=city)
+        try:
+            user = request.user
+            if user.is_authenticated:
+                account_holder = AccountHolder.objects.get(user=user)
+                account_holder.cities_visited.add(c1)
+                data['cities_visited'] = account_holder.cities_visited.all()
+        except:
+            pass
+        support_functions.update_weather(c1)
+        data['city'] = c1
+        try:
+            weather = Weather.objects.filter(city__name__contains=c1.name)[0].weather
+            data['weather'] = weather
+        except:
+            data['weather'] = "Not Available"
+    except:
+        pass
+    return render(request, "weather.html", data)
 
 def register_new_user(request):
     context = dict()

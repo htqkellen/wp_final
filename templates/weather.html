@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+    <p>
+    You selected {{ city.name }}. The current forecasted weather is {{ weather }}.
+    </p>
+    <p>
+You have looked at the following cities: <br>
+{% for c in cities_visited %}
+{{ c.name }}<br>
+{% endfor %}
+</p>
 <p><a href="..">Home</a></p>
 {% endblock %}

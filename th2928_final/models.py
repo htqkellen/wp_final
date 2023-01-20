@@ -11,6 +11,15 @@ class City(models.Model):
     def __str__(self):
         return f'{self.name} {self.latitude} {self.longitude}'
 
+class Weather(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    weather = models.CharField(max_length=50)
+    update_date = models.DateField()
+    def __repr__(self):
+        return f'{self.city.name} {self.weather} {self.update_date}'
+    def __str__(self):
+        return f'{self.city.name} {self.weather} {self.update_date}'
+
 class AccountHolder(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     date_of_birth = models.DateField()
