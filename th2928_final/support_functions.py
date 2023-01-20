@@ -17,6 +17,8 @@ def get_city_list():
             city = detail[0].get_text().strip()
             latitude = float(f"{detail[1].get_text().strip()}.{detail[2].get_text().strip()}")
             longitude = float(f"{detail[3].get_text().strip()}.{detail[4].get_text().strip()}")
+            if "Can." in city:
+                continue
             if (city, latitude, longitude) in city_list:
                 continue
             city_list.append((city, latitude, longitude))
