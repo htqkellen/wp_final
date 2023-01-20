@@ -14,7 +14,7 @@ class City(models.Model):
 class AccountHolder(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     date_of_birth = models.DateField()
-    currencies_visited = models.ManyToManyField(City)
+    cities_visited = models.ManyToManyField(City)
     def __str__(self):
         return self.user.username
     def __repr__(self):
