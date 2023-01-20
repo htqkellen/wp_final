@@ -31,6 +31,9 @@ def maintenance(request):
 
 def view_cities(request):
     data = dict()
+    for obj in City.objects.all():
+        obj.delete()
+
     try:
         choice = request.GET['city.x']
         if choice != None:
