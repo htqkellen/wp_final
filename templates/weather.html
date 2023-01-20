@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <p>
+    <h2>
     You selected {{ city.name }}. The current forecasted weather is {{ weather }}.
-    </p>
+    </h2>
     <p>
-You have looked at the following cities: <br>
+You have looked at the following cities, you might want to check them out again: <br>
 {% for c in cities_visited %}
-{{ c.name }}<br>
+<form action="{% url 'weather' %}" method="get">
+    <input type="submit" value="{{ c.name }}" name="city">
+</form>
 {% endfor %}
+    <form action="{% url 'cities' %}" method="get">
+        <input type="submit" value="None of above, take me back to city list" name="city">
+    </form>
 </p>
 <p><a href="..">Home</a></p>
 {% endblock %}

@@ -31,7 +31,6 @@ def maintenance(request):
 
 def view_cities(request):
     data = dict()
-
     try:
         choice = request.GET['city.x']
         if choice != None:
