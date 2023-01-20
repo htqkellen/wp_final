@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <p><a href="..">Home</a></p>
-<h1>Cities</h1>
-<table>
-    <tr>
-        <th>City</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
-    </tr>
-    {% for c in cities %}
-    <tr>
-    <td>{{ c.name }}</td><td>{{ c.latitude }}</td><td>{{ c.longitude }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<h1 id="start">Cities</h1>
+<div class="container">
+    <div class="row">
+        <table class="table-center">
+            <tr>
+                <th>City</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+            {% for c in cities %}
+                <tr>
+                    <td>{{ c.name }}</td><td>{{ c.latitude }}</td><td>{{ c.longitude }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
 {% endblock %}

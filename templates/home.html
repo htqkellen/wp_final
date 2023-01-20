@@ -4,22 +4,22 @@
     <div class="jumbotron text-center">
         <p>Welcome to your <span style="color:red">One-Stop travel planning</span> app!</p>
         <p>- Get packs ready since {{ time_of_day }} -</p>
+        <form action="{% url 'cities' %}" method="get">
+            <input type="image" src='{% static "th2928_final/start.jpg" %}'
+                   alt="start img" class="img-center" name="city">
+            <p id="start">Let's get started by clicking to depart  ↑↑↑</p>
+        </form>
     </div>
-    <div id="instruction">
-        Click pictures under each step to get some quick peeks
-    </div>
+    <h3 class="lobster">How does this webapp work?</h3>
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <h3 class="lobster">Step 1: Lured by their names!</h3>
-                    <form action="{% url 'cities' %}" method="get">
-                        <input type="image" src='{% static "th2928_final/map.png" %}'
-                        alt="city img" class="img-center" name="city">
-                    </form>
+                <h3 class="lobster">Step 1: Check out possible destination!</h3>
+                    <img src='{% static "th2928_final/map.png" %}'
+                        alt="city img" class="img-center">
             </div>
             <div class="col-sm-4">
-                <h3 class="lobster">Step 2: How's the weather?</h3>
-                    <p><a href="./weather">Weather</a></p>
+                <h3 class="lobster">Step 2: Check out the weather?</h3>
                     <img src='{% static "th2928_final/weather.jpg" %}' alt="weather img"
                      class="img-center">
             </div>

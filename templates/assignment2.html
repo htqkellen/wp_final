@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Assignment2</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="{% static 'th2928_final/style_assignment2.css' %}">
+    </head>
+    <body>
+        <img src='{% static "th2928_final/Basketball.png" %}' alt="logo img">
+        <h1 id="start">Quick peek at Basketball</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3 class="knewave">Top leagues (List)</h3>
+                    <ul>
+                        <li>NBA</li>
+                        <li>EuroLeague</li>
+                        <li>FIBA</li>
+                        <li>Basketbol Süper Ligi</li>
+                        <li>CBA</li>
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <h3 class="knewave">Top NBA teams (Table)</h3>
+                    <table class="table-center">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Team Name</th>
+                        </tr>
+                        <tr><td>1</td><td>Memphis Grizzlies</td></tr>
+                        <tr><td>2</td><td>Boston Celtics</td></tr>
+                        <tr><td>3</td><td>Cleveland Cavaliers</td></tr>
+                        <tr><td>4</td><td>Brooklyn Nets</td></tr>
+                        <tr><td>5</td><td>Philadelphia 76ers</td></tr>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <h3 class="knewave">Some images <p>(link to images)</p></h3>
+                    <ol>
+                        <li><a href="https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/3975.png&w=350
+                        &h=254" alt="curry img">Stephen Curry</a> </li>
+                        <li><a href="https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png" alt="curry img">
+                            LeBron James</a> </li>
+                        <li><a href="https://cdn.nba.com/headshots/nba/latest/1040x760/203076.png" alt="curry img">
+                            Anthony Davis</a> </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            ©2023 Tianqi Hong Assignment2. All Rights Reserved
+        </div>
+    </body>
+</html>

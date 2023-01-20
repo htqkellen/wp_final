@@ -1,0 +1,23 @@
+#footer { /* use with id = "footer" */
+display:inline-block;
+width:100%;
+height:1em;
+padding: 2em 0.25em;
+text-align: center;
+font-size: xx-small;
+}
+
+#start{
+  font-weight: bold;
+  text-decoration: underline;
+  color:blue;
+    text-align: center;
+}
+
+.knewave {
+color: green;
+font-family: 'knewave';
+  text-align: center;
+font-size: 36px;
+}
+

@@ -49,3 +49,11 @@ def view_weather(request):
     data = dict()
 
     return render(request,'weather.html',context=data)
+
+
+
+
+
+def assignment2(request):
+    data = dict()
+    return render(request, 'assignment2.html', context=data)

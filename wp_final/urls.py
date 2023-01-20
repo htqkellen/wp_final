@@ -20,8 +20,10 @@ from th2928_final import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
+    path('home',views.home, name='home1'),
     path('maintenance',views.maintenance,name='maintenance'),
     path('cities',views.view_cities, name='cities'),
     path('weather',views.view_weather, name='weather'),
+    path("assignment2", views.assignment2, name="assignment2"),
 
 ]
