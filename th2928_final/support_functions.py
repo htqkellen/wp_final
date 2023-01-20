@@ -75,3 +75,24 @@ def update_weather(city):
             weather_object.save()
     except:
         pass
+
+
+def get_ticket(city_from, state_from, city_to, state_to, date):
+    url = f"https://www.expedia.com/Flights-Search?leg1=from%3A{city_from}%2C{state_from}%2Cto%3A{city_to}%2C{state_to}" \
+          f"departure%3A{month}%2F{day}%2F{year}TANYT&mode=search&options=carrier%3A*%2Ccabinclass%3A%2Cmaxhops%3A1%2" \
+          f"Cnopenalty%3AN&pageId=0&passengers=adults%3A1%2Cchildren%3A0%2Cinfantinlap%3AN&trip=oneway"
+    import requests
+    from bs4 import BeautifulSoup
+    weather_ls = list()
+    try:
+        page_source = BeautifulSoup(requests.get(url).content, features="html.parser")
+    except:
+        return weather_ls
+    data = page_source.find_all("p", {"class": "short-desc"})
+    for line in data:
+        try:
+            weather = line.get_text(separator=" ").strip()
+            weather_ls.append((city, weather))
+        except:
+            continue
+    return weather_ls

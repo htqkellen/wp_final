@@ -24,6 +24,7 @@ class AccountHolder(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     date_of_birth = models.DateField()
     cities_visited = models.ManyToManyField(City)
+
     def __str__(self):
         return self.user.username
     def __repr__(self):

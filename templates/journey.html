@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="jumbotron text-center" style="background-color: cornflowerblue">
+        <h2 style="color:brown">Please enter the departure location and departure date:</h2>
+        <form action="{% url 'ticket' %}" method="get">
+            <input type="hidden" value="{{ decision.name }}" name="decision">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h4>City:</h4>
+                        <input class="form-control d-inline-block" name="city-from" type="text">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h4>State:</h4>
+                        <input class="form-control d-inline-block" name="state-from" type="text">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h4>Date of Departure:</h4>
+                        <input class="form-control d-inline-block" name="date" type="date">
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+{% endblock %}

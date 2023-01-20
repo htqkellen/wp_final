@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-5">
                 <p>No time to waste! I've decided! I will go to:</p>
-                <form action="{% url 'ticket' %}" method="get">
+                <form action="{% url 'journey' %}" method="get">
                     <select class="form-control d-inline-block" name="decision">
                         {% for c in cities %}
                         <option value="{{ c.name }}">{{ c.name }}</option>

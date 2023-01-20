@@ -85,6 +85,21 @@ def register_new_user(request):
         context['form'] = form
         return render(request, "registration/register.html", context)
 
+def journey(request):
+    data = dict()
+
+    try:
+        decision = request.GET['decision']
+        city_from = request.GET['city-from']
+        state_from = request.GET['state-from']
+        date = request.GET['date']
+        decision = City.objects.get(name=decision)
+        data['decision'] = decision
+        #support_functions.update_weather(c1)
+    except:
+        pass
+    return render(request, 'journey.html', context=data)
+
 def ticket(request):
     data = dict()
     return render(request, 'ticket.html', context=data)
