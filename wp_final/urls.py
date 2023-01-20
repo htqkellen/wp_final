@@ -28,5 +28,6 @@ urlpatterns = [
     path('weather',views.view_weather, name='weather'),
     path("assignment2", views.assignment2, name="assignment2"),
     path('register',views.register_new_user,name="register_user"),
+    path('ticket',views.ticket,name="ticket"),
 
 ]

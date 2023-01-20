@@ -61,6 +61,7 @@ def view_weather(request):
             pass
         support_functions.update_weather(c1)
         data['city'] = c1
+        data['cities'] = City.objects.all()
         try:
             weather = Weather.objects.filter(city__name__contains=c1.name)[0].weather
             data['weather'] = weather
@@ -84,7 +85,9 @@ def register_new_user(request):
         context['form'] = form
         return render(request, "registration/register.html", context)
 
-
+def ticket(request):
+    data = dict()
+    return render(request, 'ticket.html', context=data)
 
 def assignment2(request):
     data = dict()

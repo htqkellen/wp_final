@@ -2,18 +2,33 @@
 {% load static %}
 {% block content %}
     <h2>
-    You selected {{ city.name }}. The current forecasted weather is {{ weather }}.
+    You selected {{ city.name }}. The current forecasted weather is<br>
+        <span style="color: red;text-decoration: underline;background-color: yellow">{{ weather }}</span>.
     </h2>
-    <p>
-You have looked at the following cities, you might want to check them out again: <br>
-{% for c in cities_visited %}
-<form action="{% url 'weather' %}" method="get">
-    <input type="submit" value="{{ c.name }}" name="city">
-</form>
-{% endfor %}
-    <form action="{% url 'cities' %}" method="get">
-        <input type="submit" value="None of above, take me back to city list" name="city">
-    </form>
-</p>
-<p><a href="..">Home</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <p>You have looked at the following cities, you might want to check them out again: </p>
+                    {% for c in cities_visited %}
+                        <form action="{% url 'weather' %}" method="get">
+                            <input type="submit" value="{{ c.name }}" name="city">
+                        </form>
+                    {% endfor %}
+                        <form action="{% url 'cities' %}" method="get">
+                            <input type="submit" value="None of above, take me back to city list" name="city">
+                        </form>
+            </div>
+            <div class="col-sm-5">
+                <p>No time to waste! I've decided! I will go to:</p>
+                <form action="{% url 'ticket' %}" method="get">
+                    <select class="form-control d-inline-block" name="decision">
+                        {% for c in cities %}
+                        <option value="{{ c.name }}">{{ c.name }}</option>
+                        {% endfor %}
+                    </select>
+                <input type="submit" value="Decide!">
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<img src='{% static "th2928_final/logo.png" %}' alt="logo img">
+<a href="{% url 'home1' %}"><img src='{% static "th2928_final/logo.png" %}' alt="logo img"></a>
     <span style="float:right;">
         {% if user.username %}
             <span class="large-font">Hello {{ user.username }}!</span><br>
