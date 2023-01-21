@@ -122,6 +122,8 @@ def get_ticket(city_from, state_from, city_to, state_to, date):
     driver = Chrome(options=options, service=chrome_service)
     driver.implicitly_wait(5)
 
+    return driver
+
     year = int(date.split("-")[0])
     month = int(date.split("-")[1])
     day = int(date.split("-")[2])
