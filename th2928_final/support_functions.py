@@ -137,10 +137,10 @@ def get_ticket(city_from, state_from, city_to, state_to, date):
     except:
         return ticket_ls
 
-    return driver.find_elements(By.CSS_SELECTOR, "div[class*='fare-details']")
+    return driver.find_elements(By.TAG_NAME, "div")
 
     scraped_ls = [ele.text for ele in driver.find_elements(By.CSS_SELECTOR, "div[class*='fare-details']")]
-    #print(scraped_ls)
+    print(scraped_ls)
     try:
         for ii in range(15):
             if ii % 2 == 0:
