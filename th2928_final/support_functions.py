@@ -122,8 +122,6 @@ def get_ticket(city_from, state_from, city_to, state_to, date):
     driver = Chrome(options=options, service=chrome_service)
     driver.implicitly_wait(5)
 
-    return driver
-
     year = int(date.split("-")[0])
     month = int(date.split("-")[1])
     day = int(date.split("-")[2])
@@ -138,6 +136,9 @@ def get_ticket(city_from, state_from, city_to, state_to, date):
         time.sleep(15)
     except:
         return ticket_ls
+
+    return driver
+
     scraped_ls = [ele.text for ele in driver.find_elements(By.CSS_SELECTOR, "div[class*='fare-details']")]
     print(scraped_ls)
     try:
