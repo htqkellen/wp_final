@@ -68,6 +68,24 @@ def view_weather(request):
             data['weather'] = weather
         except:
             data['weather'] = "Not Available"
+
+        if "sunny" in weather.lower():
+            bg_img = "sunny"
+        elif "clear" in weather.lower():
+            bg_img = "clear"
+        elif "rain" in weather.lower():
+            bg_img = "rain"
+        elif "snow" in weather.lower():
+            bg_img = "snow"
+        elif "cloudy" in weather.lower():
+            bg_img = "cloudy"
+        elif data['weather'] == "Not Available":
+            bg_img = "unhappy"
+        else:
+            bg_img = "clear"
+
+        data['bg_img'] = f"th2928_final/{bg_img}.gif"
+
     except:
         pass
     return render(request, "weather.html", data)

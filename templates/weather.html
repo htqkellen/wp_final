@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <h2 class="table-center">
-    You selected {{ city.name }}. The current forecasted weather is
+    <div class="jumbotron text-center" style="background-image: url('{% static bg_img %}');
+            background-repeat: no-repeat; background-size: 100% 100%;">
+    <br><br>
+        <h2 class="table-center" style="background-color: cornflowerblue;">
+            You selected {{ city.name }}. The current forecasted weather is
         <span style="color: red;text-decoration: underline;background-color: yellow">{{ weather }}</span>.
-    </h2>
+        </h2>
+    <br><br><br>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
