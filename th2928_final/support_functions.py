@@ -78,76 +78,21 @@ def update_weather(city):
 
 
 def get_ticket(city_from, state_from, city_to, state_to, date):
-    '''
-    import statistics
-    import time
-    from selenium import webdriver
-    from selenium.webdriver import
-    from selenium.webdriver.firefox.service import Service
-    from selenium.webdriver.common.by import By
-    from webdriver_manager.firefox import GeckoDriverManager
-
-    # start by defining the options
-    options = webdriver.FirefoxOptions()
-    options.headless = True  # it's more scalable to work in headless mode
-    # normally, selenium waits for all resources to download
-    # we don't need it as the page also populated with the running javascript code.
-    options.page_load_strategy = 'none'
-    # this returns the path web driver downloaded
-    firefox_path = GeckoDriverManager().install()
-    firefox_service = Service(firefox_path)
-    # pass the defined options and service objects to initialize the web driver
-    driver = Firefox(options=options, service=firefox_service)
-    driver.implicitly_wait(5)
-    '''
-
-    import statistics
-    import time
-    from selenium import webdriver
-    from selenium.webdriver import Chrome
-    from selenium.webdriver.chrome.service import Service
-    from selenium.webdriver.common.by import By
-    from webdriver_manager.chrome import ChromeDriverManager
-
-    # start by defining the options
-    options = webdriver.ChromeOptions()
-    options.headless = True  # it's more scalable to work in headless mode
-    # normally, selenium waits for all resources to download
-    # we don't need it as the page also populated with the running javascript code.
-    options.page_load_strategy = 'none'
-    # this returns the path web driver downloaded
-    chrome_path = ChromeDriverManager().install()
-    chrome_service = Service(chrome_path)
-    # pass the defined options and service objects to initialize the web driver
-    driver = Chrome(options=options, service=chrome_service)
-    driver.implicitly_wait(5)
+    import requests
+    from bs4 import BeautifulSoup
 
     year = int(date.split("-")[0])
     month = int(date.split("-")[1])
     day = int(date.split("-")[2])
 
-    url = f"https://www.cheapoair.com/air/listing?&d1={city_from}+{state_from}&r1={city_to}+{state_to}&dt1={month}/" \
-          f"{day}/{year}&triptype=ONEWAYTRIP&cl=ECONOMY&ad=1&se=0&ch=0&infs=0&infl=0"
-    #url = f"https://www.cheapoair.com/air/listing?&d1=New+York+NY&r1=Boston+Mass&dt1=2/16/2023&triptype=ONEWAYTRIP&cl=ECONOMY&ad=1&se=0&ch=0&infs=0&infl=0
+    url = f"https://www.travelmath.com/flying-time/from/{city_from},+{state_from}/to/{city_to},+{state_to}"
+    #url = https://www.travelmath.com/flying-time/from/New+York,+NY/to/Boston,+MA
 
-    ticket_ls = list()
-    try:
-        driver.get(url)
-        time.sleep(15)
-    except:
-        return ticket_ls
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, features="html.parser")
+    data_lines = soup.find_all('h3', {"id":"flyingtime"})
+    fly_time=data_lines[0].get_text().strip()
 
-    return driver.find_elements(By.TAG_NAME, "div")
 
-    scraped_ls = [ele.text for ele in driver.find_elements(By.CSS_SELECTOR, "div[class*='fare-details']")]
-    print(scraped_ls)
-    try:
-        for ii in range(15):
-            if ii % 2 == 0:
-                ticket_ls.append(float(scraped_ls[ii].split("$")[1]))
-    except:
-        for ii in range(len(scraped_ls)):
-            if ii % 2 == 0:
-                ticket_ls.append(float(scraped_ls[ii].split("$")[1]))
 
-    return statistics.mean(ticket_ls)
+    return fly_time
