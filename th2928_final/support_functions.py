@@ -2,8 +2,6 @@ from th2928_final.models import *
 
 
 def get_city_list():
-    for obj in City.objects.all():
-        obj.delete()
     city_list = list()
     import requests
     from bs4 import BeautifulSoup
@@ -112,24 +110,36 @@ def get_estimate(city_from, state_from, city_to, state_to, date):
     cost = data_lines[0].get_text().strip()
     result.append(cost)
 
+
     url = f'https://www.travelmath.com/cities/{city_from},+{state_from}'
     response = requests.get(url)
     soup = BeautifulSoup(response.content, features="html.parser")
-    data_lines = soup.find_all('h3', {"id": "costofdriving"})
-    cost = data_lines[0].get_text().strip()
-    result.append(cost)
+    data_lines = soup.find_all('h3', {"class": "space"})
+    lat = data_lines[0].get_text().split("/")[0].strip().split(" ")
+    long = data_lines[0].get_text().split("/")[1].strip().split(" ")
 
+    lat = float(lat[0][:-1]) + float(lat[1][:-1])/60+float(lat[2][:-1])/3600
+    long = float(long[0][:-1]) + float(long[1][:-1]) / 60 + float(long[2][:-1]) / 3600
+    result.append([lat,-long])
 
     return result
 
 
-def add_markers(m,visiting_cities):
+def add_markers(m,visiting_cities, my_icon):
     import folium
 
     lat = City.objects.filter(name=visiting_cities)[0].latitude
     lon = -City.objects.filter(name=visiting_cities)[0].longitude
     if lat != 0.0 and lon != 0.0:
-        icon = folium.Icon(color="blue",prefix="fa",icon="plane")
+        icon = folium.Icon(color="blue",prefix="fa",icon=my_icon)
+        marker = folium.Marker((lat,lon),icon=icon)
+        marker.add_to(m)
+    return m
+
+def add_markers_mod(m,lat, lon, my_icon):
+    import folium
+    if lat != 0.0 and lon != 0.0:
+        icon = folium.Icon(color="blue",prefix="fa",icon=my_icon)
         marker = folium.Marker((lat,lon),icon=icon)
         marker.add_to(m)
     return m

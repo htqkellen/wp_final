@@ -119,10 +119,18 @@ def estimate(request):
         data['drivedist'] = result[1]
         data['cost'] = result[2]
 
+        lat = result[3][0]
+        long = result[3][1]
+
+
+
         m = folium.Map(width=400, height=300)
-        m = support_functions.add_markers(m, decision)
+        m = support_functions.add_markers(m, decision, "plane")
+        m = support_functions.add_markers_mod(m, lat,long, "house")
         m = m._repr_html_
         data['m'] = m
+
+
 
     except:
         pass
