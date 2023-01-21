@@ -92,6 +92,10 @@ def journey(request):
         decision = request.GET['decision']
         decision = City.objects.get(name=decision)
         data['decision'] = decision
+
+        support_functions.update_state()
+        data['state'] = State.objects.all()
+
     except:
         pass
     return render(request, 'journey.html', context=data)

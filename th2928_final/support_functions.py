@@ -2,6 +2,8 @@ from th2928_final.models import *
 
 
 def get_city_list():
+    for obj in City.objects.all():
+        obj.delete()
     city_list = list()
     import requests
     from bs4 import BeautifulSoup
@@ -15,8 +17,8 @@ def get_city_list():
         try:
             detail = line.find_all('td')
             city = detail[0].get_text().strip()
-            latitude = float(f"{detail[1].get_text().strip()}.{detail[2].get_text().strip()}")
-            longitude = float(f"{detail[3].get_text().strip()}.{detail[4].get_text().strip()}")
+            latitude = float(detail[1].get_text().strip())+float(detail[2].get_text().strip())/60
+            longitude = float(detail[3].get_text().strip())+float(detail[4].get_text().strip())/60
             if "Can." in city:
                 continue
             if (city, latitude, longitude) in city_list:
@@ -110,6 +112,14 @@ def get_estimate(city_from, state_from, city_to, state_to, date):
     cost = data_lines[0].get_text().strip()
     result.append(cost)
 
+    url = f'https://www.travelmath.com/cities/{city_from},+{state_from}'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, features="html.parser")
+    data_lines = soup.find_all('h3', {"id": "costofdriving"})
+    cost = data_lines[0].get_text().strip()
+    result.append(cost)
+
+
     return result
 
 
@@ -123,3 +133,39 @@ def add_markers(m,visiting_cities):
         marker = folium.Marker((lat,lon),icon=icon)
         marker.add_to(m)
     return m
+
+def get_state():
+    url = "https://www.50states.com/abbreviations.htm"
+    import requests
+    from bs4 import BeautifulSoup
+    state_ls = list()
+    try:
+        page_source = BeautifulSoup(requests.get(url).content)
+    except:
+        return state_ls
+    body = page_source.find('tbody')
+    data_lines = body.find_all('tr')
+    for line in data_lines:
+        data=line.find_all('td')
+        try:
+            name = data[0].get_text().strip()
+            abb = data[1].get_text().strip()
+            postal = data[2].get_text().strip()
+            state_ls.append((name,abb, postal))
+        except:
+            continue
+    return state_ls
+
+def update_state():
+    try:
+        new_states = get_state()
+        for new_state in new_states:
+            try:
+                state_object = State.objects.get(name=new_state[0])
+                state_object.postal = new_state[1]
+                state_object.abb = new_state[2]
+            except:
+                state_object = State(name=new_state[0], postal=new_state[1], abb=new_state[2])
+            state_object.save()
+    except:
+        pass

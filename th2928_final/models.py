@@ -20,6 +20,15 @@ class Weather(models.Model):
     def __str__(self):
         return f'{self.city.name} {self.weather} {self.update_date}'
 
+class State(models.Model):
+    name = models.CharField(max_length=100)
+    postal = models.CharField(max_length=5)
+    abb = models.CharField(max_length=50)
+    def __repr__(self):
+        return f'{self.name} {self.abb} {self.postal}'
+    def __str__(self):
+        return f'{self.name} {self.abb} {self.postal}'
+
 class AccountHolder(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     date_of_birth = models.DateField()
