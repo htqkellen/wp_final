@@ -78,21 +78,48 @@ def update_weather(city):
 
 
 def get_ticket(city_from, state_from, city_to, state_to, date):
-    url = f"https://www.expedia.com/Flights-Search?leg1=from%3A{city_from}%2C{state_from}%2Cto%3A{city_to}%2C{state_to}" \
-          f"departure%3A{month}%2F{day}%2F{year}TANYT&mode=search&options=carrier%3A*%2Ccabinclass%3A%2Cmaxhops%3A1%2" \
-          f"Cnopenalty%3AN&pageId=0&passengers=adults%3A1%2Cchildren%3A0%2Cinfantinlap%3AN&trip=oneway"
-    import requests
-    from bs4 import BeautifulSoup
-    weather_ls = list()
+    import statistics
+    import time
+    from selenium import webdriver
+    from selenium.webdriver import Chrome
+    from selenium.webdriver.chrome.service import Service
+    from selenium.webdriver.common.by import By
+    from webdriver_manager.chrome import ChromeDriverManager
+
+    # start by defining the options
+    options = webdriver.ChromeOptions()
+    options.headless = True  # it's more scalable to work in headless mode
+    # normally, selenium waits for all resources to download
+    # we don't need it as the page also populated with the running javascript code.
+    options.page_load_strategy = 'none'
+    # this returns the path web driver downloaded
+    chrome_path = ChromeDriverManager().install()
+    chrome_service = Service(chrome_path)
+    # pass the defined options and service objects to initialize the web driver
+    driver = Chrome(options=options, service=chrome_service)
+    driver.implicitly_wait(5)
+
+    year = int(date.split("-")[0])
+    month = int(date.split("-")[1])
+    day = int(date.split("-")[2])
+
+    url = f"https://www.cheapoair.com/air/listing?&d1={city_from}+{state_from}&r1={city_to}+{state_to}&dt1={month}/" \
+          f"{day}/{year}&triptype=ONEWAYTRIP&cl=ECONOMY&ad=1&se=0&ch=0&infs=0&infl=0"
+
+    ticket_ls = list()
     try:
-        page_source = BeautifulSoup(requests.get(url).content, features="html.parser")
+        driver.get(url)
+        time.sleep(15)
     except:
-        return weather_ls
-    data = page_source.find_all("p", {"class": "short-desc"})
-    for line in data:
-        try:
-            weather = line.get_text(separator=" ").strip()
-            weather_ls.append((city, weather))
-        except:
-            continue
-    return weather_ls
+        return ticket_ls
+    scraped_ls = [ele.text for ele in driver.find_elements(By.CSS_SELECTOR, "div[class*='fare-details']")]
+    try:
+        for ii in range(15):
+            if ii % 2 == 0:
+                ticket_ls.append(float(scraped_ls[ii].split("$")[1]))
+    except:
+        for ii in range(len(scraped_ls)):
+            if ii % 2 == 0:
+                ticket_ls.append(float(scraped_ls[ii].split("$")[1]))
+
+    return statistics.mean(ticket_ls)

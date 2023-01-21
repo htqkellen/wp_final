@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <h2>The average price is {{ fare }}</h2>
+<a href="{% url 'cities' %}" style="font-weight: bolder; font-size: 50px; color: blue;text-decoration: underline">
+                Price not so pretty, take me back to city page!</a>
+{%  endblock %}

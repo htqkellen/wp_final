@@ -87,21 +87,30 @@ def register_new_user(request):
 
 def journey(request):
     data = dict()
-
     try:
         decision = request.GET['decision']
-        city_from = request.GET['city-from']
-        state_from = request.GET['state-from']
-        date = request.GET['date']
         decision = City.objects.get(name=decision)
         data['decision'] = decision
-        #support_functions.update_weather(c1)
     except:
         pass
     return render(request, 'journey.html', context=data)
 
 def ticket(request):
     data = dict()
+
+    try:
+        decision = request.GET['decision']
+        city_from = request.GET['city-from'].replace(" ", "+")
+        state_from = request.GET['state-from'].replace(" ", "+")
+        city_to = decision.split(", ")[0]
+        state_to = decision.split(", ")[1]
+        date = request.GET['date']
+
+        price = support_functions.get_ticket(city_from, state_from, city_to, state_to, date)
+        price = round(price, 2)
+        data['fare']= f'${price}'
+    except:
+        pass
     return render(request, 'ticket.html', context=data)
 
 def assignment2(request):
