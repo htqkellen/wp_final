@@ -136,6 +136,9 @@ def estimate(request):
         pass
     return render(request, 'estimate.html', context=data)
 
+def end(request):
+    data = dict()
+    return render(request, 'end.html', context=data)
 
 def assignment2(request):
     data = dict()

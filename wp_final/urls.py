@@ -30,5 +30,6 @@ urlpatterns = [
     path('register',views.register_new_user,name="register_user"),
     path('estimate',views.estimate,name="estimate"),
     path('journey',views.journey,name="journey"),
+    path('end',views.end,name="end"),
 
 ]
