@@ -107,9 +107,8 @@ def ticket(request):
         date = request.GET['date']
 
         price = support_functions.get_ticket(city_from, state_from, city_to, state_to, date)
-        data['fare']=price
         #price = round(price, 2)
-        #data['fare']= f'${price}'
+        data['fare']= f'${price}'
     except:
         pass
     return render(request, 'ticket.html', context=data)
