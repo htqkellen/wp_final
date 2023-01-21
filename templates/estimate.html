@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="jumbotron text-center" style="background-color: darkblue; ">
+                <h2 style="color: white"><br><br>Some Estimates<br><br><br></h2>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <h2 class="text-center" style="background-color: #ea2c2c;color: white">The Map</h2>
+            <span style="display: block;margin-left: auto;margin-right: auto;width: 50%;">
+                {{ m | safe }}
+            </span>
+        </div>
+    </div>
+    <div style="background-color: #ea2c2c">
+        <h2 style="color: black">The average flight time from {{ from }} to {{ to }} is {{ flytime }}</h2>
+    </div>
+    <div style="background-color: #ea2c2c">
+        <h2 style="color: black">The driving distance from {{ from }} to {{ to }} is {{ drivedist }}</h2>
+    </div>
+    <div style="background-color: #ea2c2c">
+        <h2 style="color: black">The cost of driving is about {{ cost }}</h2>
+    </div>
+<a href="{% url 'cities' %}" style="font-weight: bolder; font-size: 50px; color: blue;text-decoration: underline">
+                No satisfactory trips, take me back to the city page!</a>
+{%  endblock %}

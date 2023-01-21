@@ -3,7 +3,7 @@
 {% block content %}
     <div class="jumbotron text-center" style="background-color: cornflowerblue">
         <h2 style="color:brown">Please enter the departure location and departure date:</h2>
-        <form action="{% url 'ticket' %}" method="get">
+        <form action="{% url 'estimate' %}" method="get">
             <input type="hidden" value="{{ decision.name }}" name="decision">
             <div class="row">
                 <div class="col-sm-4">

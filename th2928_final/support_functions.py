@@ -77,9 +77,11 @@ def update_weather(city):
         pass
 
 
-def get_ticket(city_from, state_from, city_to, state_to, date):
+def get_estimate(city_from, state_from, city_to, state_to, date):
     import requests
     from bs4 import BeautifulSoup
+
+    result = []
 
     year = int(date.split("-")[0])
     month = int(date.split("-")[1])
@@ -92,7 +94,32 @@ def get_ticket(city_from, state_from, city_to, state_to, date):
     soup = BeautifulSoup(response.content, features="html.parser")
     data_lines = soup.find_all('h3', {"id":"flyingtime"})
     fly_time=data_lines[0].get_text().strip()
+    result.append(fly_time)
+
+    url = f'https://www.travelmath.com/drive-distance/from/{city_from},+{state_from}/to/{city_to},+{state_to}'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, features="html.parser")
+    data_lines = soup.find_all('h3', {"id": "drivedist"})
+    drive_distance = data_lines[0].get_text().strip()
+    result.append(drive_distance)
+
+    url = f'https://www.travelmath.com/cost-of-driving/from/{city_from},+{state_from}/to/{city_to},+{state_to}'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, features="html.parser")
+    data_lines = soup.find_all('h3', {"id": "costofdriving"})
+    cost = data_lines[0].get_text().strip()
+    result.append(cost)
+
+    return result
 
 
+def add_markers(m,visiting_cities):
+    import folium
 
-    return fly_time
+    lat = City.objects.filter(name=visiting_cities)[0].latitude
+    lon = -City.objects.filter(name=visiting_cities)[0].longitude
+    if lat != 0.0 and lon != 0.0:
+        icon = folium.Icon(color="blue",prefix="fa",icon="plane")
+        marker = folium.Marker((lat,lon),icon=icon)
+        marker.add_to(m)
+    return m

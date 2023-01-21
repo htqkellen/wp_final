@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from th2928_final import support_functions
 from th2928_final.models import *
+import folium as folium
 
 # Create your views here.
 def home(request):
@@ -95,7 +96,7 @@ def journey(request):
         pass
     return render(request, 'journey.html', context=data)
 
-def ticket(request):
+def estimate(request):
     data = dict()
 
     try:
@@ -106,13 +107,23 @@ def ticket(request):
         state_to = decision.split(", ")[1]
         date = request.GET['date']
 
-        price = support_functions.get_ticket(city_from, state_from, city_to, state_to, date)
-        data['fare'] = price
-        #price = round(price, 2)
-        #data['fare']= f'${price}'
+        data['from'] = f'{city_from.replace("+", " ")}, {state_from.replace("+", " ")}'
+        data['to'] = decision
+
+        result = support_functions.get_estimate(city_from, state_from, city_to, state_to, date)
+        data['flytime'] = result[0]
+        data['drivedist'] = result[1]
+        data['cost'] = result[2]
+
+        m = folium.Map(width=400, height=300)
+        m = support_functions.add_markers(m, decision)
+        m = m._repr_html_
+        data['m'] = m
+
     except:
         pass
-    return render(request, 'ticket.html', context=data)
+    return render(request, 'estimate.html', context=data)
+
 
 def assignment2(request):
     data = dict()
