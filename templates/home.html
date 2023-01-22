@@ -2,7 +2,10 @@
 {% load static %}
 {% block content %}
     <div class="jumbotron text-center" style="background-color: cornflowerblue">
-        <p>Welcome to your <span style="color:darkred">One-Stop travel planning</span> app!</p>
+        <p>Welcome to your
+            <span style="color:darkblue">One-Stop</span>
+            <span style="color: white"> Domestic</span>
+            <span style="color: darkred">Travel-Planning </span> app!</p>
         <p>- Get packs ready since {{ time_of_day }} -</p>
         <form action="{% url 'cities' %}" method="get">
             <input type="image" src='{% static "th2928_final/start.jpg" %}'
