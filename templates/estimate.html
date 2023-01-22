@@ -23,8 +23,28 @@
     <div style="background-color: #ea2c2c">
         <h2 style="color: black">The cost of driving is about {{ cost }}</h2>
     </div>
-    <a href="{% url 'end' %}" style="font-weight: bolder; font-size: 50px; color: green;text-decoration: underline">
-                Good to know all these! I'm ready to go!<br></a>
-<a href="{% url 'cities' %}" style="font-weight: bolder; font-size: 50px; color: red;text-decoration: underline">
-                No satisfactory trip, take me back to the city page!</a>
+    <form id="proceed_estimate" action="{% url 'end' %}" method="get">
+        <input type="hidden" value={{ decision }} name="decision">
+        <a href="#" style="font-weight: bolder; font-size: 50px; color: green;
+        text-decoration: underline" onclick="myFunction_est_to_end()">
+                Good to know all these! I'm ready to pack!
+        </a>
+    </form>
+
+    <form id="regret_estimate" action="{% url 'cities' %}" method="get">
+        <input type="hidden" value="None of above, take me back to city list" name="city.x">
+        <a href="#" style="font-weight: bolder; font-size: 50px; color: red;
+        text-decoration: underline" onclick="myFunction_est_to_city()">
+                No satisfactory trip, take me back to the city page!
+        </a>
+    </form>
+    <script>
+        function myFunction_est_to_city() {
+            document.getElementById("regret_estimate").submit();
+        }
+        function myFunction_est_to_end() {
+            document.getElementById("proceed_estimate").submit();
+        }
+    </script>
+
 {%  endblock %}

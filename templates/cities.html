@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 id="start">Cities</h1>
+<h1 id="start" style="text-align: center">Major U.S. Cities</h1>
 <div class="container">
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-3">
             <table class="table-center">
                 <tr>
                     <th>City</th>
                 </tr>
-                {% for c in cities%}
+                {% for c in city1%}
                     <tr>
                     <td>
                         <form action="{% url 'weather' %}" method="get">
@@ -17,6 +17,58 @@
                     </td>
                     </tr>
                 {% endfor %}
+            </table>
+        </div>
+
+        <div class="col-sm-3">
+            <table class="table-center">
+                <tr>
+                    <th>City</th>
+                </tr>
+                {% for c in city2%}
+                    <tr>
+                    <td>
+                        <form action="{% url 'weather' %}" method="get">
+                            <input type="submit" value="{{ c.name }}" name="city">
+                        </form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="col-sm-3">
+            <table class="table-center">
+                <tr>
+                    <th>City</th>
+                </tr>
+                {% for c in city3%}
+                    <tr>
+                    <td>
+                        <form action="{% url 'weather' %}" method="get">
+                            <input type="submit" value="{{ c.name }}" name="city">
+                        </form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-sm-3">
+            <table class="table-center">
+                <tr>
+                    <th>City</th>
+                </tr>
+                {% for c in city4%}
+                    <tr>
+                    <td>
+                        <form action="{% url 'weather' %}" method="get">
+                            <input type="submit" value="{{ c.name }}" name="city">
+                        </form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
             </table>
         </div>
     </div>

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="jumbotron text-center">
-        <p>Welcome to your <span style="color:red">One-Stop travel planning</span> app!</p>
+    <div class="jumbotron text-center" style="background-color: cornflowerblue">
+        <p>Welcome to your <span style="color:darkred">One-Stop travel planning</span> app!</p>
         <p>- Get packs ready since {{ time_of_day }} -</p>
         <form action="{% url 'cities' %}" method="get">
             <input type="image" src='{% static "th2928_final/start.jpg" %}'
@@ -10,21 +10,21 @@
             <p id="start">Let's get started by clicking to depart  ↑↑↑</p>
         </form>
     </div>
-    <h3 class="lobster" style="color:cornflowerblue">How does this webapp work?</h3>
+    <h3 class="knewave" style="color:cornflowerblue">How does this webapp work?</h3>
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <h3 class="lobster" style="color:cornflowerblue">Step 1: Check out possible destination!</h3>
+                <h3 class="knewave" style="color:cornflowerblue">Step 1: Check out possible destination!</h3>
                     <img src='{% static "th2928_final/map.png" %}'
                         alt="city img" class="img-center">
             </div>
             <div class="col-sm-4">
-                <h3 class="lobster" style="color:cornflowerblue">Step 2: Check out the weather!</h3>
+                <h3 class="knewave" style="color:cornflowerblue">Step 2: Check out the weather!</h3>
                     <img src='{% static "th2928_final/weather.jpg" %}' alt="weather img"
                      class="img-center">
             </div>
             <div class="col-sm-4">
-                <h3 class="lobster" style="color:cornflowerblue">Step3: Check out Means of Transportation!</h3>
+                <h3 class="knewave" style="color:cornflowerblue">Step3: Check out Means of Transportation!</h3>
                     <p><img src='{% static "th2928_final/ticket.jpg" %}' alt="ticket img"
                      class="img-center"></p>
             </div>

@@ -1,7 +1,50 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="jumbotron text-center" style="background-color: darkblue; ">
-    <h2 style="color: white"><br><br>Thank you so much for planning with us!<br><br><br></h2>
-</div>
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+
+    <div class="jumbotron text-center" style="background-color: #141465; ">
+        <h2 style="color: white">Thank you so much for planning with us!</h2>
+
+        <div class="col-sm-8">
+            <h2 style="color: white">
+            If it is possible, please rate us based on your experience with us:
+            </h2>
+            <br>
+        </div>
+        <div class="col-sm-4">
+            <br>
+            <div id='rating'></div>
+        </div>
+        <br><br>
+    </div>
+
+
+
+    <div class="text-center">
+        <div class="jumbotron text-center" style="background-color: cornflowerblue; ">
+            <br>
+            <br>
+            <br>
+
+            <h2 class="lobster" style="color: white">
+                Please have a wonderful time in {{ decision }}!
+            </h2>
+
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+
+
+<script>
+    var myRating = jSuites.rating(document.getElementById('rating'), {
+        value: 0,
+        tooltip: [ 'Very bad', 'Bad', 'Average', 'Good', 'Very good' ],
+    });
+</script>
 {% endblock %}

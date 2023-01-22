@@ -22,6 +22,12 @@ font-family: 'lobster';
 font-size: 36px;
 }
 
+.knewave {
+font-family: 'knewave';
+  text-align: center;
+font-size: 36px;
+}
+
 .img-center {
   display: block;
   margin-left: auto;
@@ -48,3 +54,6 @@ font-size: 36px;
   text-decoration: underline;
   color:blue;
 }
+
+
+

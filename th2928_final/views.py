@@ -38,7 +38,20 @@ def view_cities(request):
             support_functions.add_city(support_functions.get_city_list())
             c_list = City.objects.all()
             print("Got c_list", len(c_list))
+            name_ls = [obj.name for obj in c_list]
+            one = len(name_ls) // 4
+            two = len(name_ls) * 2 // 4
+            three = len(name_ls) * 3 // 4
+            c1_ls = [City.objects.filter(name=name)[0] for name in name_ls[:one]]
+            c2_ls = [City.objects.filter(name=name)[0] for name in name_ls[one:two]]
+            c3_ls = [City.objects.filter(name=name)[0] for name in name_ls[two:three]]
+            c4_ls = [City.objects.filter(name=name)[0] for name in name_ls[three:]]
+
             data['city'] = c_list
+            data['city1'] = c1_ls
+            data['city2'] = c2_ls
+            data['city3'] = c3_ls
+            data['city4'] = c4_ls
             return HttpResponseRedirect(reverse('city'))
     except:
         pass
@@ -148,14 +161,15 @@ def estimate(request):
         m = m._repr_html_
         data['m'] = m
 
-
-
+        data['decision'] = decision
     except:
         pass
     return render(request, 'estimate.html', context=data)
 
 def end(request):
     data = dict()
+    decision = request.GET['decision']
+    data['decision'] = decision[:-1]
     return render(request, 'end.html', context=data)
 
 def assignment2(request):

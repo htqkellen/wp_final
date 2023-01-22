@@ -33,13 +33,17 @@
         </form>
         <div class="row">
             <h2>Or</h2>
-            <a href="{% url 'cities' %}" style="font-weight: bolder; font-size: 50px; color: blue;text-decoration: underline">
-                I regret, Take me back to city page!</a>
+            <form id="regret" action="{% url 'cities' %}" method="get">
+                <input type="hidden" value="None of above, take me back to city list" name="city.x">
+                <a href="#" style="font-weight: bolder; font-size: 50px; color: blue;
+                text-decoration: underline" onclick="myFunction_journey_to_city()">
+                    I regret, Take me back to city page!</a>
+            </form>
+            <script>
+                function myFunction_journey_to_city() {
+                    document.getElementById("regret").submit();
+                }
+            </script>
         </div>
-    </div>
-    <div class="jumbotron text-center" style="background-color: white">
-        <h2 style="color:red;text-decoration: underline">Please be patient! It may take a while (roughly 15 seconds)
-            after you clicked "submit"<br>
-        because we always want to find the best price for you!</h2>
     </div>
 {% endblock %}
